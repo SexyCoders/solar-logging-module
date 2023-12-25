@@ -1,5 +1,5 @@
 {
-  "name": "solar-inverter-data-logger",
+  "name": "solar-park-inverter-data-logger",
   "version": "1.0.0",
   "description": "Fetches data from solar inverters and logs it into a MongoDB database.",
   "main": "app.js",
