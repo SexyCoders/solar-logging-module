@@ -1,0 +1,16 @@
+{
+  "name": "solar-inverter-data-logger",
+  "version": "1.0.0",
+  "description": "Fetches data from solar inverters and logs it into a MongoDB database.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "mongodb": "^3.6.6"
+  }
+}
+
