@@ -15,4 +15,11 @@ services:
       - /srv/test-db:/data/db
     ports:
       - "27019:27017"
+  mongo-cloud:
+    image: mongo
+    volumes:
+      - /srv/test-db-mongocloud:/data/db
+    ports:
+      - "27020:27017"
+
 

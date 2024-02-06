@@ -1,5 +1,7 @@
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
+const crypto = require('crypto');
+
 
 // MongoDB connection URL
 //const url = 'mongo://solar-logger-module-mongo-1:27017';
@@ -25,11 +27,15 @@ async function fetchInverterList() {
   console.log('DONE!');
 }
 
-// Function to process each inverter
 async function processInverter(inverter) {
   try {
     const response = await axios.get(inverter.location, { params: { Scope: 'System' }});
-    const inverterData = { id: inverter.id, ...response.data };
+    let inverterData = { id: inverter.id, data: response.data, timestamp: new Date()};
+
+    // Create a SHA256 hash of the inverterData
+    const checksum = crypto.createHash('sha256').update(JSON.stringify(inverterData.data)).digest('hex');
+    inverterData.checksum = checksum;
+
     console.log(inverterData);
 
     const client = new MongoClient(url);
@@ -44,6 +50,7 @@ async function processInverter(inverter) {
     console.error(`Error fetching data for inverter ${inverter.id}: ${error.message}`);
   }
 }
+
 
 // Main function to execute the flow
 async function main() {
